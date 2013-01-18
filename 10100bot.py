@@ -97,13 +97,14 @@ while True:
 
     # Wait for numeric 251 which is Number online
     if data.find('251') != -1 and JOINED == False:
+        print 'Joining %s' % CHAN
         irc.send("JOIN :%s\r\n" % CHAN)
         JOINED = True
 
     # System Ping/Pong
     if data.find('PING :') != -1:
-        irc.send('PONG ' + data.split()[1] + '\r\n')
-
+        pong = data[data.find('PING :'):].split()
+        irc.send('PONG ' + pong[1] + '\r\n')
     
 #    # If someone kicks us try and rejoin.
 #    if data.find('KICK') != -1:
@@ -119,7 +120,7 @@ while True:
     if message.find('hi helper') != -1:
         msg("Hello %s" % nick)
 
-    if (message.find('http') != -1 and JOINED):
+    if (message.find('http') != -1 and JOINED and message.find('gamesurge.net') == -1):
         urls = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', message)
         file = open('urls.txt', 'a')
         file.write("\n".join(urls) + "\n");
