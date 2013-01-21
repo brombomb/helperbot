@@ -197,8 +197,11 @@ while True:
     if message.find('!spotify') != -1:
         msg("http://brombomb.com/10100bot/spotify.txt")
 
+    if message.find('!links') != -1:
+        msg("http://brombomb.com/10100bot/links.php")
+
     if message.find('!src') != -1:
         msg("http://brombomb.com/10100bot/10100bot.py")
 
     if message.find('!help') != -1:
-        msg("I will try to parse spotify, youtube, and imgur urls to the best I can.  If I can't I'll rage quit. pm brombomb with the link that made me rage quit and he'll fix it (maybe). Other commands !weather {zip}, !src")
+        msg("I will try to parse spotify, youtube, and imgur urls to the best I can.  If I can't I'll rage quit. pm brombomb with the link that made me rage quit and he'll fix it (maybe). Other commands !weather {zip}, !spotify, !links, !src")
