@@ -152,9 +152,7 @@ while True:
 
     # Lookup Youtube Video Titles
     if message.find('http://www.youtube.com/watch?v=') != -1:
-        chat = message.split(':', 2)
-        chat = chat[2] #Only keep the message
-        qs = urlparse.parse_qs(chat[chat.find('?')+1:]);
+        qs = urlparse.parse_qs(message[message.find('?')+1:]);
         try:
             response = urllib2.urlopen(YTA % qs['v'][0].strip())
             vid = json.load(response)
