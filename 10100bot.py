@@ -202,10 +202,10 @@ while True:
                 weather = json.load(response)
                 location = weather['current_observation']['observation_location']['full']
                 text = weather['current_observation']['weather']
-                temp = weather['current_observation']['temp_f']
-                feels = weather['current_observation']['feelslike_f']
+                temp = weather['current_observation']['temperature_string']
+                feels = weather['current_observation']['feelslike_string']
                 wind = weather['current_observation']['wind_string']
-                msg("Currently in %s: %s and %dF feels like %dF.  Winds %s" % (location, text, int(temp), int(feels), wind))
+                msg("Currently in %s: %s and %s feels like %s.  Winds %s" % (location, text, temp, feels, wind))
         except:
             print data
 
