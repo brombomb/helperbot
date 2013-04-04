@@ -159,10 +159,13 @@ while True:
             msg(vid['entry']['title']['$t'])
         except:
             print data
-    elif message.find('http://youtu.be/') != -1: # "Share this video" shortcut link
-        qs = urlparse.parse_qs(message[message.find('?')+1:]);
+    elif message.find('youtu.be/') != -1: # "Share this video" shortcut link
+        url = message[message.find('http'):] # Find the start of the URL
+        if url.find(' ') != -1: # We might have extra text after the link
+            url = url[:url.find(' ')] # links don't have spaces so find next space
+        url = url[url.rfind('/'):] # grab the last part of the url
         try:
-            response = urllib2.urlopen(YTA % qs['v'][0].strip())
+            response = urllib2.urlopen(YTA % url)
             vid = json.load(response)
             msg(vid['entry']['title']['$t'])
         except:
