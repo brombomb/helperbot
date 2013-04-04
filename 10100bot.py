@@ -151,7 +151,7 @@ while True:
             print data
 
     # Lookup Youtube Video Titles
-    if message.find('http://www.youtube.com/watch?v=') != -1:
+    if message.find('youtube.com/watch?v=') != -1:
         qs = urlparse.parse_qs(message[message.find('?')+1:]);
         try:
             response = urllib2.urlopen(YTA % qs['v'][0].strip())
@@ -181,14 +181,20 @@ while True:
     if message.find('!weather') != -1:
         try:
             zip = message[message.find('!weather') + 9:] # grab the zip to end of line.
-            response = urllib2.urlopen(WEATHER % zip.strip())
-            weather = json.load(response)
-            location = weather['current_observation']['observation_location']['full']
-            text = weather['current_observation']['weather']
-            temp = weather['current_observation']['temp_f']
-            feels = weather['current_observation']['feelslike_f']
-            wind = weather['current_observation']['wind_string']
-            msg("Currently in %s: %s and %dF feels like %dF.  Winds %s" % (location, text, int(temp), int(feels), wind))
+            if zip.find("balls") != -1:
+                if nick == 'GD' or nick == "GD-work":
+                    msg("Unused")
+                else:
+                    msg("Hot and sweaty")
+            else:
+                response = urllib2.urlopen(WEATHER % zip.strip())
+                weather = json.load(response)
+                location = weather['current_observation']['observation_location']['full']
+                text = weather['current_observation']['weather']
+                temp = weather['current_observation']['temp_f']
+                feels = weather['current_observation']['feelslike_f']
+                wind = weather['current_observation']['wind_string']
+                msg("Currently in %s: %s and %dF feels like %dF.  Winds %s" % (location, text, int(temp), int(feels), wind))
         except:
             print data
 
