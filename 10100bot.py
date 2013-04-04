@@ -159,7 +159,7 @@ while True:
             msg(vid['entry']['title']['$t'])
         except:
             print data
-    elif message.find('http://youtu.be/') != -1: # share this video link
+    elif message.find('http://youtu.be/') != -1: # "Share this video" shortcut link
         qs = urlparse.parse_qs(message[message.find('?')+1:]);
         try:
             response = urllib2.urlopen(YTA % qs['v'][0].strip())
